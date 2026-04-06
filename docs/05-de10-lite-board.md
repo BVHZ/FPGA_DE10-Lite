@@ -1,10 +1,10 @@
-# 📘 Hướng dẫn DE10-Lite — Intel MAX 10 FPGA (10M50DAF484C7G)
+# Hướng dẫn DE10-Lite — Intel MAX 10 FPGA (10M50DAF484C7G)
 
 > **Các phần khác**: [README.md](README.md) | [index.md](index.md) | [CLAUDE.md](CLAUDE.md) | [techniques.md](techniques.md)
 
 ---
 
-## 📑 Mục lục
+## Mục lục
 
 - [1. Tổng quan DE10-Lite](#1-tổng-quan-de10-lite)
 - [2. Thông số FPGA 10M50DAF484C7G](#2-thông-số-fpga-10m50daf484c7g)
@@ -63,7 +63,7 @@
 | **ADC** | 2 × 12-bit, 1 MSPS |
 | **Điện áp IO** | 3.3V (LVCMOS33) |
 
-> 💡 **Đặc biệt**: MAX 10 cấu hình từ **flash nội** → bật nguồn là chạy ngay, không cần nạp lại!
+> **Đặc biệt**: MAX 10 cấu hình từ **flash nội** → bật nguồn là chạy ngay, không cần nạp lại!
 
 ---
 
@@ -112,14 +112,14 @@
 Mỗi display có 7 segment: `HEXn[6:0]` = `{g, f, e, d, c, b, a}`
 
 ```
-     aaaa          Bit mapping:
-    f    b         HEXn[0] = a
-    f    b         HEXn[1] = b
-     gggg          HEXn[2] = c
-    e    c         HEXn[3] = d
-    e    c         HEXn[4] = e
-     dddd          HEXn[5] = f
-                   HEXn[6] = g
+ aaaa Bit mapping:
+ f b HEXn[0] = a
+ f b HEXn[1] = b
+ gggg HEXn[2] = c
+ e c HEXn[3] = d
+ e c HEXn[4] = e
+ dddd HEXn[5] = f
+ HEXn[6] = g
 ```
 
 **HEX0:**
@@ -165,14 +165,14 @@ Mỗi display có 7 segment: `HEXn[6:0]` = `{g, f, e, d, c, b, a}`
 | Tín hiệu | FPGA Pin | | Tín hiệu | FPGA Pin |
 |-----------|----------|-|-----------|----------|
 | `GPIO[0]` | `PIN_V10` | | `GPIO[1]` | `PIN_W10` |
-| `GPIO[2]` | `PIN_V9`  | | `GPIO[3]` | `PIN_W9`  |
-| `GPIO[4]` | `PIN_V8`  | | `GPIO[5]` | `PIN_W8`  |
-| `GPIO[6]` | `PIN_V7`  | | `GPIO[7]` | `PIN_W7`  |
-| `GPIO[8]` | `PIN_W6`  | | `GPIO[9]` | `PIN_V5`  |
-| `GPIO[10]`| `PIN_W5`  | | `GPIO[11]`| `PIN_AA15`|
+| `GPIO[2]` | `PIN_V9` | | `GPIO[3]` | `PIN_W9` |
+| `GPIO[4]` | `PIN_V8` | | `GPIO[5]` | `PIN_W8` |
+| `GPIO[6]` | `PIN_V7` | | `GPIO[7]` | `PIN_W7` |
+| `GPIO[8]` | `PIN_W6` | | `GPIO[9]` | `PIN_V5` |
+| `GPIO[10]`| `PIN_W5` | | `GPIO[11]`| `PIN_AA15`|
 | ... | ... | | `GPIO[35]` | ... |
 
-> ⚠️ GPIO hoạt động ở **3.3V**. Không nối trực tiếp với thiết bị 5V!
+> ️ GPIO hoạt động ở **3.3V**. Không nối trực tiếp với thiết bị 5V!
 
 ---
 
@@ -191,7 +191,7 @@ Mỗi display có 7 segment: `HEXn[6:0]` = `{g, f, e, d, c, b, a}`
 2. Chọn thư mục dự án, đặt tên project
 3. Add Files: thêm file .v (hoặc thêm sau)
 4. Family: MAX 10
-   Device: 10M50DAF484C7G
+ Device: 10M50DAF484C7G
 5. Finish
 ```
 
@@ -199,33 +199,33 @@ Mỗi display có 7 segment: `HEXn[6:0]` = `{g, f, e, d, c, b, a}`
 
 ```
 ┌──────────────────────────────────┐
-│ 1. Viết code Verilog (.v)        │
+│ 1. Viết code Verilog (.v) │
 └──────────┬───────────────────────┘
-           ↓
+ ↓
 ┌──────────────────────────────────┐
-│ 2. Analysis & Synthesis          │
-│    (Processing → Start)          │
-│    Kiểm tra syntax, tạo netlist  │
+│ 2. Analysis & Synthesis │
+│ (Processing → Start) │
+│ Kiểm tra syntax, tạo netlist │
 └──────────┬───────────────────────┘
-           ↓
+ ↓
 ┌──────────────────────────────────┐
-│ 3. Pin Assignment                │
-│    (Assignments → Pin Planner)   │
-│    Gán chân FPGA cho IO          │
+│ 3. Pin Assignment │
+│ (Assignments → Pin Planner) │
+│ Gán chân FPGA cho IO │
 └──────────┬───────────────────────┘
-           ↓
+ ↓
 ┌──────────────────────────────────┐
-│ 4. Full Compilation              │
-│    (Processing → Start           │
-│     Compilation)                 │
-│    Synthesis + Fitter + Timing   │
+│ 4. Full Compilation │
+│ (Processing → Start │
+│ Compilation) │
+│ Synthesis + Fitter + Timing │
 └──────────┬───────────────────────┘
-           ↓
+ ↓
 ┌──────────────────────────────────┐
-│ 5. Program Device                │
-│    (Tools → Programmer)          │
-│    File: output_files/*.sof      │
-│    Mode: JTAG → Start            │
+│ 5. Program Device │
+│ (Tools → Programmer) │
+│ File: output_files/*.sof │
+│ Mode: JTAG → Start │
 └──────────────────────────────────┘
 ```
 
@@ -251,8 +251,8 @@ set_location_assignment PIN_P11 -to MAX10_CLK1_50
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to MAX10_CLK1_50
 
 # LEDs
-set_location_assignment PIN_A8  -to LEDR[0]
-set_location_assignment PIN_A9  -to LEDR[1]
+set_location_assignment PIN_A8 -to LEDR[0]
+set_location_assignment PIN_A9 -to LEDR[1]
 set_location_assignment PIN_A10 -to LEDR[2]
 set_location_assignment PIN_B10 -to LEDR[3]
 set_location_assignment PIN_D13 -to LEDR[4]
@@ -333,17 +333,17 @@ set_location_assignment PIN_N19 -to HEX5[5]
 set_location_assignment PIN_N20 -to HEX5[6]
 
 # GPIO Header JP1
-set_location_assignment PIN_V10  -to GPIO[0]
-set_location_assignment PIN_W10  -to GPIO[1]
-set_location_assignment PIN_V9   -to GPIO[2]
-set_location_assignment PIN_W9   -to GPIO[3]
-set_location_assignment PIN_V8   -to GPIO[4]
-set_location_assignment PIN_W8   -to GPIO[5]
-set_location_assignment PIN_V7   -to GPIO[6]
-set_location_assignment PIN_W7   -to GPIO[7]
-set_location_assignment PIN_W6   -to GPIO[8]
-set_location_assignment PIN_V5   -to GPIO[9]
-set_location_assignment PIN_W5   -to GPIO[10]
+set_location_assignment PIN_V10 -to GPIO[0]
+set_location_assignment PIN_W10 -to GPIO[1]
+set_location_assignment PIN_V9 -to GPIO[2]
+set_location_assignment PIN_W9 -to GPIO[3]
+set_location_assignment PIN_V8 -to GPIO[4]
+set_location_assignment PIN_W8 -to GPIO[5]
+set_location_assignment PIN_V7 -to GPIO[6]
+set_location_assignment PIN_W7 -to GPIO[7]
+set_location_assignment PIN_W6 -to GPIO[8]
+set_location_assignment PIN_V5 -to GPIO[9]
+set_location_assignment PIN_W5 -to GPIO[10]
 set_location_assignment PIN_AA15 -to GPIO[11]
 set_location_assignment PIN_AA14 -to GPIO[12]
 
@@ -356,16 +356,16 @@ set_global_assignment -name RESERVE_ALL_UNUSED_PINS_WEAK_PULLUP "AS BIDIRECTIONA
 ```
 1. Tools → Programmer
 2. Hardware Setup: chọn "USB-Blaster"
-   (nếu không thấy → cài driver USB-Blaster)
+ (nếu không thấy → cài driver USB-Blaster)
 3. Mode: JTAG
 4. File: Add File → chọn output_files/<project>.sof
-5. ✅ Tick Program/Configure
+5. Tick Program/Configure
 6. Nhấn Start
 
 Lưu ý:
 - .sof = SRAM Object File → mất khi tắt nguồn
 - .pof = Programmer Object File → lưu vĩnh viễn vào flash
-  (File → Convert Programming Files → .pof)
+ (File → Convert Programming Files → .pof)
 ```
 
 ---
@@ -376,30 +376,30 @@ Lưu ý:
 
 ```verilog
 module blink_led(
-    input  wire       MAX10_CLK1_50,   // 50 MHz clock
-    input  wire [1:0] KEY,             // KEY[0] làm reset
-    output reg  [9:0] LEDR             // 10 LEDs
+ input wire MAX10_CLK1_50, // 50 MHz clock
+ input wire [1:0] KEY, // KEY[0] làm reset
+ output reg [9:0] LEDR // 10 LEDs
 );
 
-    // 50_000_000 / 2 = 25_000_000 (toggle mỗi 0.5s → chu kỳ 1s)
-    localparam HALF_SEC = 25_000_000;
+ // 50_000_000 / 2 = 25_000_000 (toggle mỗi 0.5s → chu kỳ 1s)
+ localparam HALF_SEC = 25_000_000;
 
-    reg [24:0] counter;   // clog2(25_000_000) = 25 bit
+ reg [24:0] counter; // clog2(25_000_000) = 25 bit
 
-    always @(posedge MAX10_CLK1_50 or negedge KEY[0]) begin
-        if (!KEY[0]) begin
-            // Reset (KEY nhấn = LOW)
-            counter  <= 0;
-            LEDR     <= 10'b0;
-        end else begin
-            if (counter == HALF_SEC - 1) begin
-                counter  <= 0;
-                LEDR[0]  <= ~LEDR[0];   // Toggle LED 0
-            end else begin
-                counter <= counter + 1;
-            end
-        end
-    end
+ always @(posedge MAX10_CLK1_50 or negedge KEY[0]) begin
+ if (!KEY[0]) begin
+ // Reset (KEY nhấn = LOW)
+ counter <= 0;
+ LEDR <= 10'b0;
+ end else begin
+ if (counter == HALF_SEC - 1) begin
+ counter <= 0;
+ LEDR[0] <= ~LEDR[0]; // Toggle LED 0
+ end else begin
+ counter <= counter + 1;
+ end
+ end
+ end
 
 endmodule
 ```
@@ -408,34 +408,34 @@ endmodule
 
 ```verilog
 module blink_all_leds(
-    input  wire       MAX10_CLK1_50,
-    input  wire [1:0] KEY,
-    output reg  [9:0] LEDR
+ input wire MAX10_CLK1_50,
+ input wire [1:0] KEY,
+ output reg [9:0] LEDR
 );
 
-    reg [31:0] counter;
+ reg [31:0] counter;
 
-    always @(posedge MAX10_CLK1_50 or negedge KEY[0]) begin
-        if (!KEY[0])
-            counter <= 0;
-        else
-            counter <= counter + 1;
-    end
+ always @(posedge MAX10_CLK1_50 or negedge KEY[0]) begin
+ if (!KEY[0])
+ counter <= 0;
+ else
+ counter <= counter + 1;
+ end
 
-    // Mỗi LED nhấp nháy ở tần số khác nhau
-    // LED0: nhanh nhất, LED9: chậm nhất
-    always @(posedge MAX10_CLK1_50) begin
-        LEDR[0] <= counter[21];   // ~12 Hz
-        LEDR[1] <= counter[22];   // ~6 Hz
-        LEDR[2] <= counter[23];   // ~3 Hz
-        LEDR[3] <= counter[24];   // ~1.5 Hz
-        LEDR[4] <= counter[25];   // ~0.75 Hz
-        LEDR[5] <= counter[26];
-        LEDR[6] <= counter[27];
-        LEDR[7] <= counter[28];
-        LEDR[8] <= counter[29];
-        LEDR[9] <= counter[30];
-    end
+ // Mỗi LED nhấp nháy ở tần số khác nhau
+ // LED0: nhanh nhất, LED9: chậm nhất
+ always @(posedge MAX10_CLK1_50) begin
+ LEDR[0] <= counter[21]; // ~12 Hz
+ LEDR[1] <= counter[22]; // ~6 Hz
+ LEDR[2] <= counter[23]; // ~3 Hz
+ LEDR[3] <= counter[24]; // ~1.5 Hz
+ LEDR[4] <= counter[25]; // ~0.75 Hz
+ LEDR[5] <= counter[26];
+ LEDR[6] <= counter[27];
+ LEDR[7] <= counter[28];
+ LEDR[8] <= counter[29];
+ LEDR[9] <= counter[30];
+ end
 
 endmodule
 ```
@@ -447,25 +447,25 @@ endmodule
 ```verilog
 // Switch ON → LED sáng (kết nối trực tiếp)
 module sw_to_led(
-    input  wire [9:0] SW,
-    output wire [9:0] LEDR
+ input wire [9:0] SW,
+ output wire [9:0] LEDR
 );
-    assign LEDR = SW;
+ assign LEDR = SW;
 endmodule
 ```
 
 ```verilog
 // Nâng cao: Logic giữa SW và LED
 module sw_led_logic(
-    input  wire [9:0] SW,
-    output wire [9:0] LEDR
+ input wire [9:0] SW,
+ output wire [9:0] LEDR
 );
-    assign LEDR[0] = SW[0] & SW[1];        // AND
-    assign LEDR[1] = SW[0] | SW[1];        // OR
-    assign LEDR[2] = SW[0] ^ SW[1];        // XOR
-    assign LEDR[3] = ~SW[0];               // NOT
-    assign LEDR[4] = SW[2] & SW[3] & SW[4]; // 3-input AND
-    assign LEDR[9:5] = SW[9:5];            // Pass-through
+ assign LEDR[0] = SW[0] & SW[1]; // AND
+ assign LEDR[1] = SW[0] | SW[1]; // OR
+ assign LEDR[2] = SW[0] ^ SW[1]; // XOR
+ assign LEDR[3] = ~SW[0]; // NOT
+ assign LEDR[4] = SW[2] & SW[3] & SW[4]; // 3-input AND
+ assign LEDR[9:5] = SW[9:5]; // Pass-through
 endmodule
 ```
 
@@ -477,31 +477,31 @@ endmodule
 
 ```verilog
 module hex_to_7seg(
-    input  wire [3:0] hex,        // 0-F
-    output reg  [6:0] seg         // Active LOW: 0=sáng, 1=tắt
+ input wire [3:0] hex, // 0-F
+ output reg [6:0] seg // Active LOW: 0=sáng, 1=tắt
 );
-    //                     gfedcba
-    always @(*) begin
-        case (hex)
-            4'h0: seg = 7'b1000000;  // 0
-            4'h1: seg = 7'b1111001;  // 1
-            4'h2: seg = 7'b0100100;  // 2
-            4'h3: seg = 7'b0110000;  // 3
-            4'h4: seg = 7'b0011001;  // 4
-            4'h5: seg = 7'b0010010;  // 5
-            4'h6: seg = 7'b0000010;  // 6
-            4'h7: seg = 7'b1111000;  // 7
-            4'h8: seg = 7'b0000000;  // 8
-            4'h9: seg = 7'b0010000;  // 9
-            4'hA: seg = 7'b0001000;  // A
-            4'hB: seg = 7'b0000011;  // b
-            4'hC: seg = 7'b1000110;  // C
-            4'hD: seg = 7'b0100001;  // d
-            4'hE: seg = 7'b0000110;  // E
-            4'hF: seg = 7'b0001110;  // F
-            default: seg = 7'b1111111; // Tắt
-        endcase
-    end
+ // gfedcba
+ always @(*) begin
+ case (hex)
+ 4'h0: seg = 7'b1000000; // 0
+ 4'h1: seg = 7'b1111001; // 1
+ 4'h2: seg = 7'b0100100; // 2
+ 4'h3: seg = 7'b0110000; // 3
+ 4'h4: seg = 7'b0011001; // 4
+ 4'h5: seg = 7'b0010010; // 5
+ 4'h6: seg = 7'b0000010; // 6
+ 4'h7: seg = 7'b1111000; // 7
+ 4'h8: seg = 7'b0000000; // 8
+ 4'h9: seg = 7'b0010000; // 9
+ 4'hA: seg = 7'b0001000; // A
+ 4'hB: seg = 7'b0000011; // b
+ 4'hC: seg = 7'b1000110; // C
+ 4'hD: seg = 7'b0100001; // d
+ 4'hE: seg = 7'b0000110; // E
+ 4'hF: seg = 7'b0001110; // F
+ default: seg = 7'b1111111; // Tắt
+ endcase
+ end
 endmodule
 ```
 
@@ -509,23 +509,23 @@ endmodule
 
 ```verilog
 module sw_to_hex(
-    input  wire [9:0] SW,
-    output wire [6:0] HEX0,     // Hiển thị SW[3:0]
-    output wire [6:0] HEX1,     // Hiển thị SW[7:4]
-    output wire [6:0] HEX2,     // Tắt
-    output wire [6:0] HEX3,     // Tắt
-    output wire [6:0] HEX4,     // Tắt
-    output wire [6:0] HEX5      // Tắt
+ input wire [9:0] SW,
+ output wire [6:0] HEX0, // Hiển thị SW[3:0]
+ output wire [6:0] HEX1, // Hiển thị SW[7:4]
+ output wire [6:0] HEX2, // Tắt
+ output wire [6:0] HEX3, // Tắt
+ output wire [6:0] HEX4, // Tắt
+ output wire [6:0] HEX5 // Tắt
 );
 
-    hex_to_7seg u_hex0 (.hex(SW[3:0]),  .seg(HEX0));
-    hex_to_7seg u_hex1 (.hex(SW[7:4]),  .seg(HEX1));
+ hex_to_7seg u_hex0 (.hex(SW[3:0]), .seg(HEX0));
+ hex_to_7seg u_hex1 (.hex(SW[7:4]), .seg(HEX1));
 
-    // Tắt các display không dùng (tất cả segment = 1)
-    assign HEX2 = 7'b1111111;
-    assign HEX3 = 7'b1111111;
-    assign HEX4 = 7'b1111111;
-    assign HEX5 = 7'b1111111;
+ // Tắt các display không dùng (tất cả segment = 1)
+ assign HEX2 = 7'b1111111;
+ assign HEX3 = 7'b1111111;
+ assign HEX4 = 7'b1111111;
+ assign HEX5 = 7'b1111111;
 
 endmodule
 ```
@@ -536,68 +536,68 @@ endmodule
 
 ```verilog
 module bcd_counter_4digit(
-    input  wire       MAX10_CLK1_50,
-    input  wire [1:0] KEY,
-    input  wire [9:0] SW,
-    output wire [6:0] HEX0, HEX1, HEX2, HEX3,
-    output wire [6:0] HEX4, HEX5,
-    output wire [9:0] LEDR
+ input wire MAX10_CLK1_50,
+ input wire [1:0] KEY,
+ input wire [9:0] SW,
+ output wire [6:0] HEX0, HEX1, HEX2, HEX3,
+ output wire [6:0] HEX4, HEX5,
+ output wire [9:0] LEDR
 );
-    wire rst_n = KEY[0];
-    wire pause = SW[0];        // SW[0] = 1 → tạm dừng
+ wire rst_n = KEY[0];
+ wire pause = SW[0]; // SW[0] = 1 → tạm dừng
 
-    // Chia tần 50MHz → 1Hz
-    reg [25:0] clk_div;
-    wire tick_1hz = (clk_div == 26'd49_999_999);
+ // Chia tần 50MHz → 1Hz
+ reg [25:0] clk_div;
+ wire tick_1hz = (clk_div == 26'd49_999_999);
 
-    always @(posedge MAX10_CLK1_50 or negedge rst_n) begin
-        if (!rst_n)   clk_div <= 0;
-        else if (tick_1hz) clk_div <= 0;
-        else          clk_div <= clk_div + 1;
-    end
+ always @(posedge MAX10_CLK1_50 or negedge rst_n) begin
+ if (!rst_n) clk_div <= 0;
+ else if (tick_1hz) clk_div <= 0;
+ else clk_div <= clk_div + 1;
+ end
 
-    // 4 bộ đếm BCD nối tiếp
-    reg [3:0] ones, tens, hundreds, thousands;
-    wire en = tick_1hz & ~pause;
+ // 4 bộ đếm BCD nối tiếp
+ reg [3:0] ones, tens, hundreds, thousands;
+ wire en = tick_1hz & ~pause;
 
-    always @(posedge MAX10_CLK1_50 or negedge rst_n) begin
-        if (!rst_n) begin
-            ones      <= 0;
-            tens      <= 0;
-            hundreds  <= 0;
-            thousands <= 0;
-        end else if (en) begin
-            if (ones == 4'd9) begin
-                ones <= 0;
-                if (tens == 4'd9) begin
-                    tens <= 0;
-                    if (hundreds == 4'd9) begin
-                        hundreds <= 0;
-                        if (thousands == 4'd9)
-                            thousands <= 0;
-                        else
-                            thousands <= thousands + 1;
-                    end else
-                        hundreds <= hundreds + 1;
-                end else
-                    tens <= tens + 1;
-            end else
-                ones <= ones + 1;
-        end
-    end
+ always @(posedge MAX10_CLK1_50 or negedge rst_n) begin
+ if (!rst_n) begin
+ ones <= 0;
+ tens <= 0;
+ hundreds <= 0;
+ thousands <= 0;
+ end else if (en) begin
+ if (ones == 4'd9) begin
+ ones <= 0;
+ if (tens == 4'd9) begin
+ tens <= 0;
+ if (hundreds == 4'd9) begin
+ hundreds <= 0;
+ if (thousands == 4'd9)
+ thousands <= 0;
+ else
+ thousands <= thousands + 1;
+ end else
+ hundreds <= hundreds + 1;
+ end else
+ tens <= tens + 1;
+ end else
+ ones <= ones + 1;
+ end
+ end
 
-    // Hiển thị lên 7-segment
-    hex_to_7seg u0 (.hex(ones),      .seg(HEX0));
-    hex_to_7seg u1 (.hex(tens),      .seg(HEX1));
-    hex_to_7seg u2 (.hex(hundreds),  .seg(HEX2));
-    hex_to_7seg u3 (.hex(thousands), .seg(HEX3));
-    assign HEX4 = 7'b1111111;
-    assign HEX5 = 7'b1111111;
+ // Hiển thị lên 7-segment
+ hex_to_7seg u0 (.hex(ones), .seg(HEX0));
+ hex_to_7seg u1 (.hex(tens), .seg(HEX1));
+ hex_to_7seg u2 (.hex(hundreds), .seg(HEX2));
+ hex_to_7seg u3 (.hex(thousands), .seg(HEX3));
+ assign HEX4 = 7'b1111111;
+ assign HEX5 = 7'b1111111;
 
-    // LED hiển thị trạng thái
-    assign LEDR[0] = tick_1hz;
-    assign LEDR[9] = pause;
-    assign LEDR[8:1] = 8'd0;
+ // LED hiển thị trạng thái
+ assign LEDR[0] = tick_1hz;
+ assign LEDR[9] = pause;
+ assign LEDR[8:1] = 8'd0;
 
 endmodule
 ```
@@ -608,36 +608,36 @@ endmodule
 
 ```verilog
 module led_runner(
-    input  wire       MAX10_CLK1_50,
-    input  wire [1:0] KEY,
-    input  wire [9:0] SW,
-    output reg  [9:0] LEDR
+ input wire MAX10_CLK1_50,
+ input wire [1:0] KEY,
+ input wire [9:0] SW,
+ output reg [9:0] LEDR
 );
-    wire rst_n = KEY[0];
-    wire dir   = SW[0];         // 0=trái, 1=phải
-    wire [3:0] speed = SW[4:1]; // Tốc độ (0=nhanh, 15=chậm)
+ wire rst_n = KEY[0];
+ wire dir = SW[0]; // 0=trái, 1=phải
+ wire [3:0] speed = SW[4:1]; // Tốc độ (0=nhanh, 15=chậm)
 
-    // Chia tần theo speed
-    reg [25:0] counter;
-    wire tick = (counter == {speed, 22'b0} + 26'd2_000_000);
+ // Chia tần theo speed
+ reg [25:0] counter;
+ wire tick = (counter == {speed, 22'b0} + 26'd2_000_000);
 
-    always @(posedge MAX10_CLK1_50 or negedge rst_n) begin
-        if (!rst_n)      counter <= 0;
-        else if (tick)   counter <= 0;
-        else             counter <= counter + 1;
-    end
+ always @(posedge MAX10_CLK1_50 or negedge rst_n) begin
+ if (!rst_n) counter <= 0;
+ else if (tick) counter <= 0;
+ else counter <= counter + 1;
+ end
 
-    // Dịch vòng LED
-    always @(posedge MAX10_CLK1_50 or negedge rst_n) begin
-        if (!rst_n)
-            LEDR <= 10'b0000000001;
-        else if (tick) begin
-            if (dir)
-                LEDR <= {LEDR[0], LEDR[9:1]};      // Dịch phải vòng
-            else
-                LEDR <= {LEDR[8:0], LEDR[9]};      // Dịch trái vòng
-        end
-    end
+ // Dịch vòng LED
+ always @(posedge MAX10_CLK1_50 or negedge rst_n) begin
+ if (!rst_n)
+ LEDR <= 10'b0000000001;
+ else if (tick) begin
+ if (dir)
+ LEDR <= {LEDR[0], LEDR[9:1]}; // Dịch phải vòng
+ else
+ LEDR <= {LEDR[8:0], LEDR[9]}; // Dịch trái vòng
+ end
+ end
 
 endmodule
 ```
@@ -650,23 +650,23 @@ endmodule
 
 ```verilog
 module gpio_output(
-    input  wire        MAX10_CLK1_50,
-    input  wire [1:0]  KEY,
-    output wire [35:0] GPIO            // 36 GPIO pins
+ input wire MAX10_CLK1_50,
+ input wire [1:0] KEY,
+ output wire [35:0] GPIO // 36 GPIO pins
 );
-    wire rst_n = KEY[0];
-    reg [31:0] counter;
+ wire rst_n = KEY[0];
+ reg [31:0] counter;
 
-    always @(posedge MAX10_CLK1_50 or negedge rst_n) begin
-        if (!rst_n) counter <= 0;
-        else        counter <= counter + 1;
-    end
+ always @(posedge MAX10_CLK1_50 or negedge rst_n) begin
+ if (!rst_n) counter <= 0;
+ else counter <= counter + 1;
+ end
 
-    // Xuất tín hiệu ra GPIO
-    assign GPIO[0] = counter[25];      // ~0.75 Hz square wave
-    assign GPIO[1] = counter[24];      // ~1.5 Hz
-    assign GPIO[2] = counter[23];      // ~3 Hz
-    assign GPIO[35:3] = 33'b0;         // Các pin còn lại = LOW
+ // Xuất tín hiệu ra GPIO
+ assign GPIO[0] = counter[25]; // ~0.75 Hz square wave
+ assign GPIO[1] = counter[24]; // ~1.5 Hz
+ assign GPIO[2] = counter[23]; // ~3 Hz
+ assign GPIO[35:3] = 33'b0; // Các pin còn lại = LOW
 
 endmodule
 ```
@@ -675,21 +675,21 @@ endmodule
 
 ```verilog
 module gpio_input(
-    input  wire        MAX10_CLK1_50,
-    input  wire [1:0]  KEY,
-    input  wire [35:0] GPIO,           // GPIO làm input
-    output wire [9:0]  LEDR
+ input wire MAX10_CLK1_50,
+ input wire [1:0] KEY,
+ input wire [35:0] GPIO, // GPIO làm input
+ output wire [9:0] LEDR
 );
-    // Đồng bộ hóa GPIO input (chống metastability)
-    reg [7:0] gpio_sync1, gpio_sync2;
+ // Đồng bộ hóa GPIO input (chống metastability)
+ reg [7:0] gpio_sync1, gpio_sync2;
 
-    always @(posedge MAX10_CLK1_50) begin
-        gpio_sync1 <= GPIO[7:0];
-        gpio_sync2 <= gpio_sync1;
-    end
+ always @(posedge MAX10_CLK1_50) begin
+ gpio_sync1 <= GPIO[7:0];
+ gpio_sync2 <= gpio_sync1;
+ end
 
-    assign LEDR[7:0] = gpio_sync2;
-    assign LEDR[9:8] = 2'b0;
+ assign LEDR[7:0] = gpio_sync2;
+ assign LEDR[9:8] = 2'b0;
 
 endmodule
 ```
@@ -698,18 +698,18 @@ endmodule
 
 ```verilog
 module gpio_bidir(
-    input  wire        MAX10_CLK1_50,
-    input  wire [9:0]  SW,
-    inout  wire [7:0]  GPIO            // Bidirectional!
+ input wire MAX10_CLK1_50,
+ input wire [9:0] SW,
+ inout wire [7:0] GPIO // Bidirectional!
 );
-    wire dir = SW[9];       // 1=output, 0=input
-    reg [7:0] gpio_out;
+ wire dir = SW[9]; // 1=output, 0=input
+ reg [7:0] gpio_out;
 
-    always @(posedge MAX10_CLK1_50)
-        gpio_out <= SW[7:0];
+ always @(posedge MAX10_CLK1_50)
+ gpio_out <= SW[7:0];
 
-    // Tri-state: output khi dir=1, hi-z khi dir=0
-    assign GPIO[7:0] = dir ? gpio_out : 8'bz;
+ // Tri-state: output khi dir=1, hi-z khi dir=0
+ assign GPIO[7:0] = dir ? gpio_out : 8'bz;
 
 endmodule
 ```
@@ -717,25 +717,25 @@ endmodule
 ### 10.4 Sơ đồ kết nối GPIO → Breadboard
 
 ```
-  DE10-Lite GPIO Header (JP1)
-  ┌─────────────────────────┐
-  │ 3.3V  GPIO[0] GPIO[1]  │
-  │ GND   GPIO[2] GPIO[3]  │   →  ┌──────────────┐
-  │ ...   ...     ...      │   →  │  Breadboard   │
-  │ 3.3V  GPIO[34] GPIO[35]│   →  │  LED + 330Ω   │
-  │ GND   5V                │   →  │  Sensor       │
-  └─────────────────────────┘      └──────────────┘
+ DE10-Lite GPIO Header (JP1)
+ ┌─────────────────────────┐
+ │ 3.3V GPIO[0] GPIO[1] │
+ │ GND GPIO[2] GPIO[3] │ → ┌──────────────┐
+ │ ... ... ... │ → │ Breadboard │
+ │ 3.3V GPIO[34] GPIO[35]│ → │ LED + 330Ω │
+ │ GND 5V │ → │ Sensor │
+ └─────────────────────────┘ └──────────────┘
 
-  Kết nối LED ra GPIO:
-  GPIO[0] ──→ 330Ω ──→ LED(+) ──→ GND
+ Kết nối LED ra GPIO:
+ GPIO[0] ──→ 330Ω ──→ LED(+) ──→ GND
 
-  Kết nối nút nhấn vào GPIO:
-  3.3V ──→ 10kΩ (pull-up) ──→ GPIO[0]
-                              ↓
-                        Button ──→ GND
+ Kết nối nút nhấn vào GPIO:
+ 3.3V ──→ 10kΩ (pull-up) ──→ GPIO[0]
+ ↓
+ Button ──→ GND
 ```
 
-> ⚠️ **Quan trọng**: GPIO pin hoạt động **3.3V**. Nếu kết nối với thiết bị 5V, cần **level shifter** hoặc **voltage divider**.
+> ️ **Quan trọng**: GPIO pin hoạt động **3.3V**. Nếu kết nối với thiết bị 5V, cần **level shifter** hoặc **voltage divider**.
 
 ---
 
@@ -757,12 +757,12 @@ endmodule
 
 ```
 File → Convert Programming Files
-  → Programming file type: .pof
-  → Configuration device: CFM (Internal Configuration)
-  → Add input file: .sof
-  → Generate
+ → Programming file type: .pof
+ → Configuration device: CFM (Internal Configuration)
+ → Add input file: .sof
+ → Generate
 ```
 
 ---
 
-> 📎 **Tài liệu tham khảo**: [DE10-Lite User Manual (Terasic)](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=1021&PartNo=4) | [MAX 10 FPGA Datasheet (Intel)](https://www.intel.com/content/www/us/en/docs/programmable/683794/) | [Quartus Prime Handbook](https://www.intel.com/content/www/us/en/docs/programmable/683283/)
+> **Tài liệu tham khảo**: [DE10-Lite User Manual (Terasic)](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=1021&PartNo=4) | [MAX 10 FPGA Datasheet (Intel)](https://www.intel.com/content/www/us/en/docs/programmable/683794/) | [Quartus Prime Handbook](https://www.intel.com/content/www/us/en/docs/programmable/683283/)
